@@ -28,6 +28,7 @@ services:
       - DB_PASSWORD=secret_password
       - DB_HOST=db  # ¡OJO! Aquí usamos el nombre del servicio 'db' como host
       - DB_PORT=5432
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
 
 # Definición del volumen persistente
 volumes:

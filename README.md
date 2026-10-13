@@ -77,6 +77,13 @@ que Django use el servicio PostgreSQL y conserva los datos en el volumen
 docker compose down
 ```
 
+Para publicar el servicio en una instancia EC2, configura la IP pública como
+host permitido antes de levantar los contenedores:
+```bash
+export DJANGO_ALLOWED_HOSTS=54.158.35.65
+docker compose up -d --build
+```
+
 ## 📂 Estructura de Archivos (App: tienda_app)
 ```
 tienda/
@@ -93,4 +100,3 @@ tienda/
 ├── services.py        # Capa de Servicio (Orquestación)
 ├── views.py           # Class-Based Views
 └── models.py          # Modelos de Django
-

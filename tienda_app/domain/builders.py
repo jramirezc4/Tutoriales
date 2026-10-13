@@ -11,6 +11,7 @@ class OrdenBuilder:
     def reset(self):
         self._usuario = None
         self._libro = None
+        self._productos = []
         self._cantidad = 1
         self._direccion = ""
 
@@ -20,6 +21,12 @@ class OrdenBuilder:
 
     def con_libro(self, libro):
         self._libro = libro
+        return self
+
+    def con_productos(self, productos):
+        self._productos = list(productos)
+        if len(self._productos) == 1:
+            self._libro = self._productos[0]
         return self
 
     def con_cantidad(self, cantidad):
@@ -33,6 +40,10 @@ class OrdenBuilder:
     def build(self) -> Orden:
         if not self._libro:
             raise ValueError("Datos insuficientes para crear la orden.")
+        if self._productos and len(self._productos) > 1:
+            raise ValueError(
+                "El modelo Orden actual solo permite un libro por orden."
+            )
 
         total_unitario = CalculadorImpuestos.obtener_total_con_iva(self._libro.precio)
         total = Decimal(total_unitario) * self._cantidad

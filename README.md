@@ -62,6 +62,21 @@ Inventario.objects.create(libro=l, cantidad=5)
 python manage.py runserver
 ```
 
+### 5. Ejecutar con Docker
+Con Docker Desktop iniciado, levante Django y PostgreSQL desde la raíz del
+proyecto:
+```bash
+docker compose up --build
+```
+
+La API estará disponible en
+`http://localhost:8000/api/v1/comprar/`. Compose configura `DB_HOST=db` para
+que Django use el servicio PostgreSQL y conserva los datos en el volumen
+`postgres_data`. Para detener los contenedores:
+```bash
+docker compose down
+```
+
 ## 📂 Estructura de Archivos (App: tienda_app)
 ```
 tienda/
@@ -78,5 +93,4 @@ tienda/
 ├── services.py        # Capa de Servicio (Orquestación)
 ├── views.py           # Class-Based Views
 └── models.py          # Modelos de Django
-
 

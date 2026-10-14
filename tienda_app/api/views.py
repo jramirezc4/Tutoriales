@@ -3,9 +3,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from tienda_app.infra.factories import PaymentFactory
+from tienda_app.models import Libro
 from tienda_app.services import CompraService
 
 from .serializers import OrdenInputSerializer
+from .serializers import LibroSerializer
+
+
+class ProductosAPIView(APIView):
+    """Lista los productos disponibles en la API v1."""
+
+    def get(self, request):
+        productos = Libro.objects.all()
+        return Response(LibroSerializer(productos, many=True).data)
 
 
 class CompraAPIView(APIView):
